@@ -1,3 +1,5 @@
+require 'hash_brown/version'
+
 class Hash
   def method_missing meth, *args, &block
     return self[meth] if self.has_key? meth
