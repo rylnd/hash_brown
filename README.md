@@ -14,9 +14,14 @@ If you're using Bundler, add this line to your `Gemfile`:
 
 ## Usage
     hash = { :key_sym => 'sym_val', 'key_str' => 'str_val' }
+      # => {:key_sym=>"sym_val", "key_str"=>"str_val"}
 
-    hash.key_sym    #=> 'sym_val'
-    hash.key_str    #=> 'str_val'
+    hash.key_sym                   # => "sym_val"
+    hash.key_str                   # => "str_val"
+    hash.key_str = 'new_val'       # => "new_val"
+    hash.new_key = 'next_val'      # => "next_val"
+    hash
+      # => {:key_sym=>"sym_val", "key_str"=>"new_val", :new_key=>"next_val"}
 
 
 # WARNING! Modifies the behavior of Hash.

@@ -59,14 +59,65 @@ describe HashBrown do
 
       context 'writer' do
 
-        xit 'assigns a symbol' do
+        it 'assigns a symbol' do
           hash.key_sym = 'new_val'
+
           hash.key_sym.should == 'new_val'
         end
 
-        xit 'assigns a string' do
+        it 'assigns a string' do
           hash.key_str = 'new_val'
+
           hash.key_str.should == 'new_val'
+          hash.key_str.should == hash['key_str']
+        end
+
+        context 'given comparable symbol and string keys' do
+          before { hash[key_value] = 'old_val' }
+
+          context 'no key exists' do
+            let(:key_value) { 'old_key' }
+
+            it 'assigns to symbol' do
+              hash.new_key = 'new_val'
+
+              hash.new_key.should == 'new_val'
+              hash.new_key.should == hash[:new_key]
+            end
+          end
+
+          context 'only symbol key exists' do
+            let(:key_value) { :key_sym }
+
+            it 'assigns to symbol' do
+              hash.key_sym = 'new_val'
+
+              hash.key_sym.should == 'new_val'
+              hash.key_sym.should == hash[key_value]
+            end
+          end
+
+          context 'only string key exists' do
+            let(:key_value) { 'key_str' }
+
+            it 'assigns to string' do
+              hash.key_str = 'new_val'
+
+              hash.key_str.should == 'new_val'
+              hash.key_str.should == hash[key_value]
+            end
+          end
+
+          context 'both symbol and string keys exist' do
+            let(:key_value) { :key_sym }
+
+            it 'assigns to symbol' do
+              hash.key_sym = 'new_val'
+
+              hash.key_sym.should == 'new_val'
+              hash.key_sym.should == hash[key_value]
+            end
+          end
         end
       end
     end
